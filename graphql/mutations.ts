@@ -16,3 +16,13 @@ export const ADD_NOVEL = gql`
 		}
 	}
 `;
+
+export const ADD_AUTHOR = gql`
+	mutation Mutation($novelId: ID!, $name: String) {
+		addAuthor(novelId: $novelId, name: $name) {
+			id
+			name
+			novelId
+		}
+	}
+`;

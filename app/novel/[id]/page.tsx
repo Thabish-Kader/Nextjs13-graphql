@@ -1,12 +1,23 @@
 "use client";
+import { ADD_AUTHOR } from "@/graphql/mutations";
 import { GET_NOVEL } from "@/graphql/queries";
 import { INovel } from "@/typings";
-import { useQuery } from "@apollo/client";
-import React from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import React, { useState } from "react";
 
 const Novel = ({ params: { id } }: { params: { id: string } }) => {
+	const [name, setName] = useState("");
 	const { data, loading, error } = useQuery(GET_NOVEL, { variables: { id } });
+	const [addAuthor] = useMutation(ADD_AUTHOR, {
+		variables: { id, name },
+		refetchQueries: [{ query: GET_NOVEL, variables: { id } }],
+	});
 	const novel: INovel = data?.novel;
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		if (name === "") return alert("Please enter author name");
+	};
 
 	if (loading)
 		return (
@@ -45,11 +56,21 @@ const Novel = ({ params: { id } }: { params: { id: string } }) => {
 						ipsam corrupti ipsum quaerat? Sed hic ipsum excepturi
 						earum minus consectetur soluta totam temporibus libero.
 					</p>
-					<div className="mt-5 space-x-2">
-						<button className="border p-2 rounded-lg">
+					<form onSubmit={handleSubmit} className="mt-5 space-x-2">
+						<input
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							type="text"
+							placeholder="Enter Author"
+							className="bg-transparent border p-2 mx-2"
+						/>
+						<button
+							disabled={!name}
+							className="border p-2 rounded-lg disabled:text-gray-500 disabled:cursor-not-allowed"
+						>
 							Add Author
 						</button>
-					</div>
+					</form>
 				</div>
 			</section>
 		</article>
