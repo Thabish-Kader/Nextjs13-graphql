@@ -6,9 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Novel {
@@ -25,6 +24,4 @@ model Author {
   name    String
   Novel   Novel?  @relation(fields: [novelId], references: [id])
   novelId String?
-
-  @@index([novelId])
 }
