@@ -33,13 +33,15 @@ const typeDefs = `#graphql
 
   type Mutation {
     addNovel (image:String, title:String) : Novel
-    updateNovel(id:String, title:String, image:String) : Novel
-    deleteNovel(id:String) : Novel
+    updateNovel(id:ID!, title:String, image:String) : Novel
+    deleteNovel(id:ID!) : Novel
+	addAuthor(novelId:ID!, name:String): Author
   }
 `;
 
 const resolvers = {
 	Query: {
+		//get novel by id
 		novel: async (_parent: any, args: any, context: Context) => {
 			return await context.prisma.novel.findUnique({
 				where: {
@@ -47,21 +49,25 @@ const resolvers = {
 				},
 			});
 		},
+		// get all novels
 		novels: async (_parent: any, _args: any, context: Context) => {
 			return await context.prisma.novel.findMany({
 				include: { author: true },
 			});
 		},
+		// get all authors
 		authors: async (_parent: any, _args: any, context: Context) => {
 			return await context.prisma.author.findMany();
 		},
 	},
+	// nested resolve function to get auhtors in novels
 	Novel: {
 		authors: async (_parent: any, _args: any, context: Context) => {
 			return await context.prisma.author.findMany();
 		},
 	},
 	Mutation: {
+		// add novel
 		addNovel: async (_parent: any, args: any, context: Context) => {
 			return await context.prisma.novel.create({
 				data: {
@@ -70,6 +76,7 @@ const resolvers = {
 				},
 			});
 		},
+		// update novel
 		updateNovel: async (_parent: any, args: any, context: Context) => {
 			return await context.prisma.novel.update({
 				where: {
@@ -77,6 +84,15 @@ const resolvers = {
 				},
 				data: {
 					title: args.title,
+					image: args.image,
+				},
+			});
+		},
+		addAuthor: async (_parent: any, args: any, context: Context) => {
+			return await context.prisma.author.create({
+				data: {
+					novelId: args.novelId,
+					name: args.name,
 				},
 			});
 		},
