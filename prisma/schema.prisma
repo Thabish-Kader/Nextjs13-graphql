@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Novel {
-  id        String   @id @default(uuid())
-  title     String
-  image     String?
+  id    String  @id @default(uuid())
+  title String
+  image String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   author    Author[]

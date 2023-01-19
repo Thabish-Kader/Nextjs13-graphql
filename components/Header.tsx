@@ -2,19 +2,21 @@ import React from "react";
 import { GoPlus } from "react-icons/go";
 export const Header = () => {
 	return (
-		<nav className="bg-slate-200 ">
-			<div className="flex items-center space-x-4 p-2 max-w-5xl mx-auto">
-				<img
-					src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c46c7f62556223.5a945f059c90e.png"
-					alt="logo"
-					className="h-20 w-24 object-cover"
-				/>
-				<GoPlus size={30} />
-				<img
-					src="data:image/png;base64,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"
-					alt=""
-					className="h-20 w-20"
-				/>
+		<nav className="flex flex-col p-2 max-w-5xl mx-auto">
+			<h1 className="text-5xl text-white text-center">
+				Top{" "}
+				<span className="underline underline-offset-8 decoration-red-500">
+					Books{" "}
+				</span>
+				Of All Time
+			</h1>
+
+			<div className="flex justify-between text-white mt-10 px-5">
+				<h2>Top</h2>
+				<h2>Best Selling</h2>
+				<h2>This Week</h2>
+				<h2>Upcoming</h2>
+				<h2>New</h2>
 			</div>
 		</nav>
 	);
