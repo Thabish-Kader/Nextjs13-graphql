@@ -30,7 +30,7 @@ const Novel = ({ params: { id } }: Props) => {
 	});
 
 	const novel: INovel = data?.novel;
-
+	console.log(novel);
 	const handleAddAuthor = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (name === "") return alert("Please enter author name");

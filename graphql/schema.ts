@@ -17,7 +17,7 @@ export const typeDefs = `#graphql
   type Query {
 	novel(id: ID!): Novel 
     novels: [Novel]
-    authors: [Author]
+
   }
 
   type Mutation {
