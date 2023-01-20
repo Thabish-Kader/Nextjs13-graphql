@@ -1,5 +1,5 @@
 "use client";
-import { ADD_AUTHOR, UPDATE_NOVEL } from "@/graphql/mutations";
+import { ADD_AUTHOR, DELETE_AUTHOR, UPDATE_NOVEL } from "@/graphql/mutations";
 import { GET_NOVEL } from "@/graphql/queries";
 import { INovel } from "@/typings";
 import { useMutation, useQuery } from "@apollo/client";
@@ -24,13 +24,17 @@ const Novel = ({ params: { id } }: Props) => {
 		refetchQueries: [{ query: GET_NOVEL, variables: { id } }],
 	});
 
+	const [deleteAuthor] = useMutation(DELETE_AUTHOR, {
+		refetchQueries: [{ query: GET_NOVEL, variables: { id } }],
+	});
+
 	const [updateNovel] = useMutation(UPDATE_NOVEL, {
 		variables: { id: id, title: title, image: url },
 		refetchQueries: [{ query: GET_NOVEL, variables: { id } }],
 	});
 
 	const novel: INovel = data?.novel;
-	console.log(novel);
+
 	const handleAddAuthor = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (name === "") return alert("Please enter author name");
@@ -70,8 +74,21 @@ const Novel = ({ params: { id } }: Props) => {
 
 					<div className="flex gap-2">
 						{novel?.authors?.map((author) => (
-							<div key={author.id}>
+							<div
+								key={author.id}
+								className="flex items-center gap-2"
+							>
 								<h2 className="font-bold">{author?.name}</h2>
+								<AiFillMinusCircle
+									onClick={() =>
+										deleteAuthor({
+											variables: {
+												id: author.id,
+											},
+										})
+									}
+									color="yellow"
+								/>
 							</div>
 						))}
 					</div>

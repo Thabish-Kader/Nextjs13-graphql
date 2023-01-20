@@ -72,9 +72,8 @@ export const resolvers = {
 		},
 		// delete author
 		deleteAuthor: async (_parent: any, args: any, context: Context) => {
-			return await context.prisma.author.deleteMany({
+			return await context.prisma.author.delete({
 				where: {
-					novelId: args.novelId,
 					id: args.id,
 				},
 			});
