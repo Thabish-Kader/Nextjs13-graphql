@@ -5,7 +5,7 @@ import { GET_NOVELS } from "@/graphql/queries";
 
 import { INovel } from "@/typings";
 import { Novel } from "./Novel";
-import { Header } from "./Header";
+
 import { ADD_NOVEL } from "@/graphql/mutations";
 
 export const Novels = () => {
