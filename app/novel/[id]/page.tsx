@@ -5,11 +5,19 @@ import { INovel } from "@/typings";
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 
-const Novel = ({ params: { id } }: { params: { id: string } }) => {
+type Props = {
+	params: {
+		id: string;
+	};
+};
+
+const Novel = ({ params: { id } }: Props) => {
 	const [name, setName] = useState("");
-	const { data, loading, error } = useQuery(GET_NOVEL, { variables: { id } });
+	const { data, loading, error } = useQuery(GET_NOVEL, {
+		variables: { id },
+	});
 	const [addAuthor] = useMutation(ADD_AUTHOR, {
-		variables: { id, name },
+		variables: { novelId: id, name },
 		refetchQueries: [{ query: GET_NOVEL, variables: { id } }],
 	});
 	const novel: INovel = data?.novel;
@@ -17,6 +25,8 @@ const Novel = ({ params: { id } }: { params: { id: string } }) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (name === "") return alert("Please enter author name");
+		addAuthor({ variables: { novelId: id, name } });
+		setName("");
 	};
 
 	if (loading)
@@ -41,9 +51,11 @@ const Novel = ({ params: { id } }: { params: { id: string } }) => {
 				<div className="p-2 flex flex-col">
 					<h1 className="text-4xl ">Title : {novel.title}</h1>
 
-					<div className="flex divide-x-2 space-x-4">
+					<div className="flex items-center gap-2">
 						{novel?.authors?.map((author) => (
-							<h2 className="font-bold">{author.name}</h2>
+							<h2 key={author.id} className="font-bold">
+								{author.name}
+							</h2>
 						))}
 					</div>
 					<p className="text-slate-400 ">
