@@ -11,6 +11,8 @@
 <br/>
 <br/>
 
+A project created to understand how to use appolo server and client version 4 with next js 13
+
 ### Resources
 
 -   [Resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-chains)
