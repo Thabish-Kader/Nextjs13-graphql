@@ -15,6 +15,7 @@ A project created to understand how to use appolo server and client version 4 wi
 
 ### Youtube Video
 [![Next.js 13, Apollo Server v4 and GraphQL: Building a powerful and efficient API | Server Side](https://ytcards.demolab.com/?id=UUDR4yje92s&title=Next.js+13%2C+Apollo+Server+v4+and+GraphQL%3A+Building+a+powerful+and+efficient+API+%7C+Server+Side&lang=en&timestamp=1675627218&background_color=%230d1117&title_color=%23ffffff&stats_color=%23dedede&width=250 "Next.js 13, Apollo Server v4 and GraphQL: Building a powerful and efficient API | Server Side")](https://www.youtube.com/watch?v=UUDR4yje92s)
+[![Next.js 13, Apollo Client v4 and GraphQL: Building a powerful and efficient API | Client Side](https://ytcards.demolab.com/?id=LpwCa9BbfPY&title=Next.js+13%2C+Apollo+Client+v4+and+GraphQL%3A+Building+a+powerful+and+efficient+API+%7C+Client+Side&lang=en&timestamp=1675972807&background_color=%230d1117&title_color=%23ffffff&stats_color=%23dedede&width=250 "Next.js 13, Apollo Client v4 and GraphQL: Building a powerful and efficient API | Client Side")](https://www.youtube.com/watch?v=LpwCa9BbfPY)
 
 ### Resources
 
